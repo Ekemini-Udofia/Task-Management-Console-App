@@ -46,4 +46,4 @@ This project was developed as a learning exercise to solidify understanding of f
 
 2.  Follow the on-screen menu prompts to interact with the application.
 
-## Project Structure
+Copyright © 2025 Ekemini Udofia
