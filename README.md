@@ -6,7 +6,9 @@ A Simple Task Management Application (C++)
 
 This project is a command-line based Task Management Application built using C++. It allows users to create, manage, and track their tasks efficiently. The application utilizes object-oriented principles to organize tasks into categories (optional) and provides functionalities to add, list, mark tasks as complete, and set due dates.
 
-This project was developed as a learning exercise to solidify understanding of fundamental C++ concepts such as classes, functions, inheritance (optional), header files, and basic input/output operations. It aims to demonstrate good coding practices and a structured approach to software development.
+This project was developed as a learning exercise to solidify understanding of fundamental C++ concepts such as classes, functions, inheritance, header files, and basic input/output operations. It aims to demonstrate good coding practices and a structured approach to software development.
+
+![IMG-001](https://github.com/user-attachments/assets/64001a58-6dc9-4b15-a908-c81fcf21a0eb)
 
 ## Features
 
@@ -47,3 +49,4 @@ This project was developed as a learning exercise to solidify understanding of f
 2.  Follow the on-screen menu prompts to interact with the application.
 
 Copyright © 2025 Ekemini Udofia
+
