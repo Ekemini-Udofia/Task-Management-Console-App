@@ -3,6 +3,9 @@
 // Global Variables
 std::string  global_task_name;
 std::string global_username;
+
+//function prototypes
+
 void greet_user()
 {
     int i = 0;
