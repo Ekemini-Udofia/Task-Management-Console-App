@@ -59,28 +59,44 @@ void view_all_tasks()
 void display_options()
 {
     int option;
-    std::cout << "\nSelect an action from the list below: \n1. Create a new task\n2. View all tasks\n3. Remove a task\n4. Change username\n5. Exit\n";
+    std::cout << "\nSelect an action from the list below: \n1. Create a new task\n2. View all tasks\n3. View all Categories\n4. Remove a task\n5. Change username\n6. Exit\n";
     std::cin >> option;
     if (option == 1)
     {
         Input_Task();
+        display_options();
+        
     }
     else if (option == 2)
     {
         view_all_tasks();
+        display_options();
     }
     else if (option == 3)
     {
-        //remove tasl
+        //display_categories();
+        std::cout << "Display Categories\n";
+        display_options();
     }
     else if (option == 4)
     {
-        std::cout << "Input a new username: ";
-        std::cin >> global_username;
+        //remove task
+        display_options();
     }
     else if (option == 5)
     {
+        std::cout << "Input a new username: ";
+        std::cin >> global_username;
+        display_options();
+    }
+    else if (option == 6)
+    {
         exit;
+    }
+    else
+    {
+        std::cout << "Invalid Option\n";
+        display_options();
     }
 }
 
@@ -89,7 +105,6 @@ void display_options()
 int main(int argc, char* argv[])
 {
     greet_user();
-    display_options();
     display_options();
     //Task global_task_name;
     //std::cout << global_task_name << "\n";
