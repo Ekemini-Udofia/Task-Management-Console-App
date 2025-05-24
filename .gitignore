@@ -371,3 +371,5 @@ Task-Management-Console-App.sln
 Task-Management-Console-App.sln
 Task-Management-Console-App.vcxproj
 Task-Management-Console-App.vcxproj.filters
+src/main.exe
+.vscode/settings.json

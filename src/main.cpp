@@ -1,10 +1,18 @@
 #include <iostream>
+#include <vector>
+#include <string>
+#include "lib/Task.h"
+// This is a simple personal task management application in C++
 
-// Global Variables
-std::string  global_task_name;
-std::string global_username;
 
-//function prototypes
+// Create the general task vectors for storing the tasks
+std::vector<Task> Task_List;
+
+std::string global_username = "User"; // Default username
+
+
+
+
 
 void greet_user()
 {
@@ -21,39 +29,25 @@ void greet_user()
     }
 }
 
-class Task
-{
-    public:
-        int task_id = 0;
-        std::string task_name = global_task_name;
-        std::string task_content = "Null";
-        std::string due_date = "Null";
-        Task()
-        {
-            std::cout << "New task created: " << task_name << "\n";
-        }
-        Task(std::string task_name, std::string task_content, std::string due_date)
-        {
-            this->task_name = task_name;
-            this->task_content = task_content;
-            this->due_date = due_date;
-            std::cout << "New task created: " << task_name << "\n";
-        }
-
-    private:
-};
 
 void Input_Task()
 {
+    std::string new_task;
     std::cout << "#New task";
     std::cout << "Task Name : ";
-    std::cin >> global_task_name;
-    std::cout << std::endl;
+    std::cin >> new_task;
+    Task_List.push_back(Task(new_task, "No content", "No due date"));
+    std::cout <<"> Task Created: "<< std::endl;
 }
 
 void view_all_tasks()
 {
     std::cout << "All Tasks" << std::endl;
+    for(int i = 0; i < Task_List.size(); i++)
+    {
+        std::cout << i + 1 << ". " << Task_List[i].task_name << std::endl;
+    }
+    // do a for loop to iterate through the Task_List vector and print out their names, maybe with the due dates
 }
 
 void display_options()
