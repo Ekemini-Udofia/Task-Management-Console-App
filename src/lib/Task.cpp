@@ -12,11 +12,11 @@ class Task
         {
             std::cout << "New task created: " << task_name << "\n";
         }
-        Task(std::string task_name, std::string task_content, std::string due_date)
+        Task(std::string name, std::string content, std::string date)
         {
-            this->task_name = task_name;
-            this->task_content = task_content;
-            this->due_date = due_date;
+            this-> task_name = name;
+            this->task_content = content;
+            this->due_date = date;
             std::cout << "New task created: " << task_name << "\n";
         }
         ~Task()

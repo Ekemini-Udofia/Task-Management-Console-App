@@ -33,10 +33,15 @@ void greet_user()
 void Input_Task()
 {
     std::string new_task;
-    std::cout << "#New task";
-    std::cout << "Task Name : ";
+    std::string new_date;
+    std::string new_content;
+    std::cout << "> Task Name : ";
     std::cin >> new_task;
-    Task_List.push_back(Task(new_task, "No content", "No due date"));
+    std::cout << "> Details : ";
+    std::cin >> new_content;
+    std::cout << "> Due Date(yy/mm/dd) : ";
+    std::cin >> new_date;
+    Task_List.push_back(Task(new_task, new_content, new_date));
     std::cout <<"> Task Created: "<< std::endl;
 }
 
