@@ -3,14 +3,6 @@
 #include <string>
 #include "lib/Task.h"
 
-//Delete this after. Just testing😂!
-/*
-#include <mutex>
-#include <thread>
-std::thread_local<std::mutex> thread_mutex; // Mutex for thread safety
-*/
-
-
 // This is a simple personal task management application in C++
 
 
@@ -28,13 +20,14 @@ void greet_user()
     int i = 0;
     if (i == 0)
     {
-        std::cout << "Welcome to your Personal Task Management app!\nLet's get to know you.\nName: ";
+        std::cin.ignore();
+        std::cout << "> Welcome to your Personal Task Management app!\nLet's get to know you.\nName: ";
         std::cin >> global_username;
-        std::cout << "Nice to meet you, " << global_username << "!\n";
+        std::cout << "> Nice to meet you, " << global_username << "!\n";
     }
     else
     {
-        std::cout << "Welcome " << global_username << std::endl;
+        std::cout << "> Welcome " << global_username << std::endl;
     }
 }
 
@@ -48,7 +41,7 @@ void Input_Task()
     std::cout << "> Task Name : ";
     std::getline(std::cin, new_task);
     if (new_task.empty()) {
-        std::cout << "Task name cannot be empty. Please try again.\n";
+        std::cout << "> Task name cannot be empty. Please try again.\n";
         Input_Task();
         return;
     }
@@ -73,7 +66,7 @@ void view_all_tasks()
 void display_options()
 {
     int option;
-    std::cout << "\n> Select an action from the list below: \n> 1. Create a new task\n> 2. View all tasks\n> 3. View all Categories\n4. Remove a task\n5. Change username\n6. Exit\n";
+    std::cout << "\n> Select an action from the list below: \n> 1. Create a new task\n> 2. View all tasks\n> 3. View all Categories\n> 4. Remove a task\n> 5. Change username\n> 6. Exit\n";
     std::cin >> option;
     if (option == 1)
     {
