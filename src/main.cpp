@@ -2,6 +2,10 @@
 #include <vector>
 #include <string>
 #include "lib/Task.h"
+#include <fstream>
+#include <filesystem>
+
+
 
 // This is a simple personal task management application in C++
 
@@ -11,8 +15,9 @@ std::vector<Task> Task_List;
 
 std::string global_username = "User"; // Default username
 
+// Create an output file for writing to 
 
-
+std::ofstream new_file("task_data.txt");
 
 
 void greet_user()
@@ -20,9 +25,9 @@ void greet_user()
     int i = 0;
     if (i == 0)
     {
-        std::cin.ignore();
-        std::cout << "> Welcome to your Personal Task Management app!\nLet's get to know you.\nName: ";
-        std::cin >> global_username;
+        //std::cin.ignore();
+        std::cout << "> Welcome to your Personal Task Management app!\n> Let's get to know you.\n> Name: ";
+        std::getline(std::cin, global_username);
         std::cout << "> Nice to meet you, " << global_username << "!\n";
     }
     else
@@ -66,7 +71,7 @@ void view_all_tasks()
 void display_options()
 {
     int option;
-    std::cout << "\n> Select an action from the list below: \n> 1. Create a new task\n> 2. View all tasks\n> 3. View all Categories\n> 4. Remove a task\n> 5. Change username\n> 6. Exit\n";
+    std::cout << "> \n> Select an action from the list below: \n> 1. Create a new task\n> 2. View all tasks\n> 3. View all Categories\n> 4. Remove a task\n> 5. Change username\n> 6. Exit\n> ";
     std::cin >> option;
     if (option == 1)
     {
