@@ -83,7 +83,7 @@ static void remove_tasks(int i)
 static void display_options()
 {
     int option;
-    std::cout << "> \n> Select an action from the list below: \n> 1. Create a new task\n> 2. View all tasks\n> 3. View all Categories\n> 4. Remove a task\n> 5. Change username\n> 6. Exit\n> ";
+    std::cout << "> \n> Select an action from the list below: \n> 1. Create a new task\n> 2. View all tasks\n> 3. Remove a task\n> 4. Change Username\n> 5. Exit\n> ";
     std::cin >> option;
     if (option == 1)
     {
@@ -98,24 +98,19 @@ static void display_options()
     }
     else if (option == 3)
     {
-        //display_categories();
-        std::cout << "Display Categories\n";
-        display_options();
-    }
-    else if (option == 4)
-    {
         int i;
         std::cout << "> Input the number of the task to be deleted(Press ENTER and view all tasks to see its number : ";
         std::cin >> i;
         remove_tasks(i - 1);
         display_options();
     }
-    else if (option == 5)
+
+    else if (option == 4)
     {
         std::cout << "Input a new username: ";
         std::cin.ignore();
         std::getline(std::cin, global_username);
-        std::ofstream inFile("cred.txt", std::ios::trunc); 
+        std::ofstream inFile("cred.txt", std::ios::trunc);
         if (inFile.is_open()) {
             inFile << global_username << std::endl;
             inFile.close();
@@ -123,15 +118,17 @@ static void display_options()
         }
         display_options();
     }
-    else if (option == 6)
+        
+    else if (option == 5)
     {
         exit(0);
     }
-    else
+        
+    else if (option == 6)
     {
         std::cout << "Invalid Option\n";
         display_options();
-    }
+    }        
 }
 
 
