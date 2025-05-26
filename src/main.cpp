@@ -2,6 +2,15 @@
 #include <vector>
 #include <string>
 #include "lib/Task.h"
+
+//Delete this after. Just testing😂!
+/*
+#include <mutex>
+#include <thread>
+std::thread_local<std::mutex> thread_mutex; // Mutex for thread safety
+*/
+
+
 // This is a simple personal task management application in C++
 
 
@@ -35,12 +44,18 @@ void Input_Task()
     std::string new_task;
     std::string new_date;
     std::string new_content;
+    std::cin.ignore();
     std::cout << "> Task Name : ";
-    std::cin >> new_task;
-    std::cout << "> Details : ";
-    std::cin >> new_content;
-    std::cout << "> Due Date(yy/mm/dd) : ";
-    std::cin >> new_date;
+    std::getline(std::cin, new_task);
+    if (new_task.empty()) {
+        std::cout << "Task name cannot be empty. Please try again.\n";
+        Input_Task();
+        return;
+    }
+    std::cout << "\n> Details : ";
+    std::getline(std::cin, new_content);
+    std::cout << "\n> Due Date(yy/mm/dd) : ";
+    std::getline(std::cin, new_date);
     Task_List.push_back(Task(new_task, new_content, new_date));
     std::cout <<"> Task Created: "<< std::endl;
 }
@@ -58,7 +73,7 @@ void view_all_tasks()
 void display_options()
 {
     int option;
-    std::cout << "\nSelect an action from the list below: \n1. Create a new task\n2. View all tasks\n3. View all Categories\n4. Remove a task\n5. Change username\n6. Exit\n";
+    std::cout << "\n> Select an action from the list below: \n> 1. Create a new task\n> 2. View all tasks\n> 3. View all Categories\n4. Remove a task\n5. Change username\n6. Exit\n";
     std::cin >> option;
     if (option == 1)
     {
@@ -90,7 +105,7 @@ void display_options()
     }
     else if (option == 6)
     {
-        exit;
+        exit(0);
     }
     else
     {
