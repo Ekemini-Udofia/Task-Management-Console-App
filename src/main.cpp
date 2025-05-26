@@ -20,7 +20,7 @@ std::string global_username = "User"; // Default username
 std::ofstream new_file("task_data.txt");
 
 
-void greet_user()
+static void greet_user()
 {
     int i = 0;
     if (i == 0)
@@ -37,7 +37,7 @@ void greet_user()
 }
 
 
-void Input_Task()
+static void Input_Task()
 {
     std::string new_task;
     std::string new_date;
@@ -58,7 +58,7 @@ void Input_Task()
     std::cout <<"> Task Created: "<< std::endl;
 }
 
-void view_all_tasks()
+static void view_all_tasks()
 {
     std::cout << "All Tasks" << std::endl;
     for(int i = 0; i < Task_List.size(); i++)
@@ -67,8 +67,11 @@ void view_all_tasks()
     }
     // do a for loop to iterate through the Task_List vector and print out their names, maybe with the due dates
 }
-
-void display_options()
+static void remove_tasks(int i)
+{
+    Task_List.erase(Task_List.begin() + i);
+}
+static void display_options()
 {
     int option;
     std::cout << "> \n> Select an action from the list below: \n> 1. Create a new task\n> 2. View all tasks\n> 3. View all Categories\n> 4. Remove a task\n> 5. Change username\n> 6. Exit\n> ";
@@ -92,7 +95,10 @@ void display_options()
     }
     else if (option == 4)
     {
-        //remove task
+        int i;
+        std::cout << "> Input the number of the task to be deleted(Press ENTER and view all tasks to see its number : " << std::endl;
+        std::cin >> i;
+        remove_tasks(i - 1);
         display_options();
     }
     else if (option == 5)
