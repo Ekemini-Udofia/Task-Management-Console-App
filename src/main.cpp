@@ -61,12 +61,20 @@ static void Input_Task()
 
 static void view_all_tasks()
 {
-    std::cout << "All Tasks" << std::endl;
-    for(int i = 0; i < Task_List.size(); i++)
+    
+    if (Task_List.size())
     {
-        std::cout << i + 1 << ". " << Task_List[i].task_name << std::endl;
+        std::cout << "All Tasks" << std::endl;
+        for (int i = 0; i < Task_List.size(); i++)
+        {
+            std::cout << i + 1 << ". " << Task_List[i].task_name << std::endl;
+        }
+        // do a for loop to iterate through the Task_List vector and print out their names, maybe with the due dates
     }
-    // do a for loop to iterate through the Task_List vector and print out their names, maybe with the due dates
+    else
+    {
+        std::cout << "> No Tasks!" << std::endl;
+    }
 }
 static void remove_tasks(int i)
 {
@@ -97,7 +105,7 @@ static void display_options()
     else if (option == 4)
     {
         int i;
-        std::cout << "> Input the number of the task to be deleted(Press ENTER and view all tasks to see its number : " << std::endl;
+        std::cout << "> Input the number of the task to be deleted(Press ENTER and view all tasks to see its number : ";
         std::cin >> i;
         remove_tasks(i - 1);
         display_options();
