@@ -3,6 +3,12 @@
 #include <string>
 #include "lib/Task.h"
 #include <fstream>
+#include <nlohmann/json.hpp>
+#include <Windows.h>
+#include <wincrypt.h>
+
+
+
 //#include <filesystem>
 
 
@@ -14,6 +20,67 @@
 std::vector<Task> Task_List;
 
 std::string global_username = ""; // Default username
+
+
+
+
+void from_json(const nlohmann::json& jsonData, Task& to_Task)
+{
+    jsonData.at("name").get_to(to_Task.task_name);
+    jsonData.at("content").get_to(to_Task.task_content);
+    jsonData.at("date").get_to(to_Task.due_date);
+    jsonData.at("id").get_to(to_Task.task_id);
+
+}
+
+void to_json(nlohmann::json& jsonData, const Task& from_Task)
+{
+    jsonData = nlohmann::json{
+        {"id", from_Task.task_id},
+        {"name", from_Task.task_name},
+        {"content", from_Task.task_content},
+        {"date", from_Task.due_date}
+    };
+}
+static void lOAD_TASKS_VECTOR()
+{
+    std::ifstream tasksJSON("./crypt.json");
+
+    // Check if our(?) .json file exists, if not create a new one
+    if (tasksJSON.good()) 
+    {
+        try
+        {
+            nlohmann::json taskData = nlohmann::json::parse(tasksJSON);
+            Task_List = taskData.get<std::vector<Task>>();
+        }
+        catch (const nlohmann::json::parse_error& e)
+        {
+            std::cerr << "Json  Parse Error: " << e.what() << "\n";
+        }
+    }
+    else
+    {
+        //create a new one
+        std::ofstream newcrypt("crypt.json");
+        //do nothing
+    }
+
+}
+
+
+
+static void save_tasks_to_file(const std::vector<Task>& Task_List, const std::string& filename) {
+    nlohmann::json j = Task_List;  
+
+    std::ofstream file("./crypt.json");
+    if (!file) {
+        std::cerr << "Failed to open " << filename << " for writing\n";
+        return;
+    }
+    file << j.dump(4);  // Save pretty JSON
+    file.close();
+}
 
 
 
@@ -57,6 +124,7 @@ static void Input_Task()
     std::getline(std::cin, new_date);
     Task_List.push_back(Task(new_task, new_content, new_date));
     std::cout <<"> Task Created: "<< std::endl;
+    save_tasks_to_file(Task_List, "./crypt.json");
 }
 
 static void view_all_tasks()
@@ -137,6 +205,11 @@ int main(int argc, char* argv[])
 {
 
     // Initializations
+    // 
+    // Load the data stored in the .json file into the Task_List vector
+    
+    lOAD_TASKS_VECTOR();
+
     // Create an output file for writing to 
     // check if theres a file like that named already
     
