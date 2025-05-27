@@ -375,3 +375,4 @@ src/main.exe
 .vscode/settings.json
 cred.txt
 task_data.txt
+crypt.json
