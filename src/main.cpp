@@ -5,10 +5,6 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-
-
-
-
 // This is a simple personal task management application in C++
 
 
@@ -18,6 +14,8 @@ std::string global_username = ""; // Default username
 
 
 //Function definitions and implementation
+
+// Saving persistent tasks from json to the vector and from the vector to json
 
 void from_json(const nlohmann::json& jsonData, Task& to_Task)
 {
@@ -37,36 +35,9 @@ void to_json(nlohmann::json& jsonData, const Task& from_Task)
         {"date", from_Task.due_date}
     };
 }
-static void lOAD_TASKS_VECTOR()
-{
-    std::ifstream tasksJSON("./crypt.json");
 
-    // Check if our(?) .json file exists, if not create a new one
-    if (tasksJSON.good()) 
-    {
-        try
-        {
-            nlohmann::json taskData = nlohmann::json::parse(tasksJSON);
-            Task_List = taskData.get<std::vector<Task>>();
-        }
-        catch (const nlohmann::json::parse_error& e)
-        {
-            std::cerr << "Json  Parse Error: " << e.what() << "\n";
-        }
-    }
-    else
-    {
-        //create a new one
-        std::ofstream newcrypt("crypt.json");
-        //do nothing
-    }
-
-}
-
-
-
-static void save_tasks_to_file(const std::vector<Task>& Task_List, const std::string& filename) {
-    nlohmann::json j = Task_List;  
+void save_tasks_to_file(const std::vector<Task>& Task_List, const std::string& filename) {
+    nlohmann::json j = Task_List;
 
     std::ofstream file("./crypt.json");
     if (!file) {
@@ -77,9 +48,9 @@ static void save_tasks_to_file(const std::vector<Task>& Task_List, const std::st
     file.close();
 }
 
+// Task options
 
-
-static void greet_user()
+void greet_user()
 {
     if (global_username == "")
     {
@@ -99,8 +70,7 @@ static void greet_user()
     }
 }
 
-
-static void Input_Task()
+void Input_Task()
 {
     std::string new_task;
     std::string new_date;
@@ -118,13 +88,13 @@ static void Input_Task()
     std::cout << "\n> Due Date(yy/mm/dd) : ";
     std::getline(std::cin, new_date);
     Task_List.push_back(Task(new_task, new_content, new_date));
-    std::cout <<"> Task Created: "<< std::endl;
+    std::cout << "> Task Created: " << std::endl;
     save_tasks_to_file(Task_List, "./crypt.json");
 }
 
-static void view_all_tasks()
+void view_all_tasks()
 {
-    
+
     if (Task_List.size())
     {
         std::cout << "All Tasks" << std::endl;
@@ -139,11 +109,13 @@ static void view_all_tasks()
         std::cout << "> No Tasks!" << std::endl;
     }
 }
-static void remove_tasks(int i)
+
+void remove_tasks(int i)
 {
     Task_List.erase(Task_List.begin() + i);
 }
-static void display_options()
+
+void display_options()
 {
     int option;
     std::cout << "> \n> Select an action from the list below: \n> 1. Create a new task\n> 2. View all tasks\n> 3. Remove a task\n> 4. Change Username\n> 5. Exit\n> ";
@@ -152,7 +124,7 @@ static void display_options()
     {
         Input_Task();
         display_options();
-        
+
     }
     else if (option == 2)
     {
@@ -181,34 +153,52 @@ static void display_options()
         }
         display_options();
     }
-        
+
     else if (option == 5)
     {
         exit(0);
     }
-        
-    else if (option == 6)
+
+    else
     {
         std::cout << "Invalid Option\n";
         display_options();
-    }        
+    }
 }
-
 
 
 int main(int argc, char* argv[])
 {
 
     // Initializations
-    // 
-    // Load the data stored in the .json file into the Task_List vector
-    
-    lOAD_TASKS_VECTOR();
 
-    // Create an output file for writing to 
-    // check if theres a file like that named already
-    
+    std::ifstream tasksJSON("./crypt.json");
+
+    // Check if our(?) .json file exists, if not create a new one
+    if (tasksJSON.good())
+    {
+        try
+        {
+            nlohmann::json taskData = nlohmann::json::parse(tasksJSON);
+            for (const auto& item : taskData) {
+                Task task("", "", "");
+                from_json(item, task);
+                Task_List.push_back(task);
+            }
+        }
+        catch (const nlohmann::json::parse_error e)
+        {
+            std::cerr << "Json  Parse Error: " << e.what() << "\n";
+        }
+    }
+    else
+    {
+        //create a new one
+        std::ofstream newcrypt("crypt.json");
+    }
+
     //write user name to it
+
     std::ifstream inFile("cred.txt");
     if (!inFile.is_open())
     {
