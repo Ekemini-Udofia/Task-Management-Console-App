@@ -4,8 +4,9 @@
 #include "lib/Task.h"
 #include <fstream>
 #include <nlohmann/json.hpp>
-#include <Windows.h>
-#include <wincrypt.h>
+
+//Include OpenSSL
+// This is the last commit where everything is working as it should be. Before I try to start encryption with OpenSSL
 
 
 
