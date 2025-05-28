@@ -5,25 +5,19 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-//Include OpenSSL
-// This is the last commit where everything is working as it should be. Before I try to start encryption with OpenSSL
 
-
-
-//#include <filesystem>
 
 
 
 // This is a simple personal task management application in C++
 
 
-// Create the general task vectors for storing the tasks
-std::vector<Task> Task_List;
+std::vector<Task> Task_List; // The general task vectors for storing the tasks
 
 std::string global_username = ""; // Default username
 
 
-
+//Function definitions and implementation
 
 void from_json(const nlohmann::json& jsonData, Task& to_Task)
 {
